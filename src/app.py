@@ -38,6 +38,42 @@ activities = {
         "schedule": "Mondays, Wednesdays, Fridays, 2:00 PM - 3:00 PM",
         "max_participants": 30,
         "participants": ["john@mergington.edu", "olivia@mergington.edu"]
+    },
+    "Soccer Team": {
+        "description": "Team soccer practice and league matches",
+        "schedule": "Tuesdays, Thursdays, 4:00 PM - 5:30 PM",
+        "max_participants": 18,
+        "participants": ["sara@mergington.edu", "liam@mergington.edu"]
+    },
+    "Swim Club": {
+        "description": "Lap swimming, strokes coaching, and swim meets",
+        "schedule": "Mondays, Wednesdays, 5:00 PM - 6:30 PM",
+        "max_participants": 16,
+        "participants": ["maria@mergington.edu"]
+    },
+    "Drama Club": {
+        "description": "Acting, stagecraft, and preparing school plays",
+        "schedule": "Wednesdays and Fridays, 3:45 PM - 5:15 PM",
+        "max_participants": 20,
+        "participants": ["nina@mergington.edu"]
+    },
+    "Art Studio": {
+        "description": "Drawing, painting, and creative projects for all skill levels",
+        "schedule": "Tuesdays, 4:00 PM - 5:30 PM",
+        "max_participants": 15,
+        "participants": ["oliver@mergington.edu"]
+    },
+    "Robotics Club": {
+        "description": "Design and build robots for competitions and learning",
+        "schedule": "Mondays and Thursdays, 4:15 PM - 6:00 PM",
+        "max_participants": 12,
+        "participants": ["ava@mergington.edu"]
+    },
+    "Science Olympiad": {
+        "description": "Prepare for science challenges and academic competitions",
+        "schedule": "Fridays, 3:30 PM - 5:00 PM",
+        "max_participants": 14,
+        "participants": ["noah@mergington.edu", "mia@mergington.edu"]
     }
 }
 
@@ -61,6 +97,10 @@ def signup_for_activity(activity_name: str, email: str):
 
     # Get the specific activity
     activity = activities[activity_name]
+
+    # Validate if the student is already signed up
+    if email in activity["participants"]:
+        raise HTTPException(status_code=400, detail="Student already signed up for this activity")
 
     # Add student
     activity["participants"].append(email)
